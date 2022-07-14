@@ -66,7 +66,7 @@
         ?>
 
         <h6 class="text-center" style="color: red">
-          LISTA DE ALUMNOS QUE HARAN TUTORIA EN 2022-I <strong></strong>
+          LISTA DE ALUMNOS NUEVOS PARA TUTORIA <strong></strong>
         
           
         <table class="table table-bordered table-striped">
@@ -80,8 +80,8 @@
           <tbody>
             <?php 
               $i = 1;
-              $sql=$con->query("SELECT * FROM alumnos_2021ii a INNER JOIN alumnos_2022i b
-              ON a.Codigo = b.Codigo ");        
+              $sql=$con->query("SELECT * FROM alumnos_2021ii a right JOIN alumnos_2022i b
+              ON a.Codigo = b.Codigo WHERE a.codigo IS NULL");        
               while($row = $sql->fetch_array()){ ?>
                 <tr>
                   <th scope="row"><?php echo $i++; ?></th>
