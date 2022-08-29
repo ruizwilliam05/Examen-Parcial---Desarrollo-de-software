@@ -30,7 +30,6 @@
                             <label for="formFile" class="form-label">Lista de Docentes activos de este semestre (.csv)</label>
                             <input class="form-control mb-3" name="archivo2" type="file" id="formFile">
                             
-
                             <input type="submit" class="btn btn-primary" value="Cargar Archivos">
                     </form>
                 </div>
@@ -160,7 +159,7 @@
                         <a class="nav-link " data-bs-toggle="tab" href="#AST">Alumnos Sin Tutor</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#AI">Alumnos No Matriculados 2022I</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#AI">Alumnos Inactivos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" href="#DT">Distribucion de Tutorados</a>
@@ -214,7 +213,6 @@
                             <thead>
                             <tr>
                                 <th>Numero</th>
-                                <th>Docente a Cargo</th>
                                 <th>Codigo</th>
                                 <th>Nombre</th>
                                  <!--<th>Estado</th>-->
@@ -224,20 +222,18 @@
                             <?php
                                 #$AlumnosSinMatricula=$Mox->Diferencia($Arreglo_Dis_Anterior,$Arreglo_Matriculados);
                                 $AlumnosConDistribucionActual=$Mox->EliminarInactivos($Arreglo_Dis_Anterior_AlumnoDocente,$AlumnosSinMatricula);
-                                #$Mox->Imprimir($Arreglo_Dis_Anterior_AlumnoDocente);
                         
                                 #$Mox->Imprimir($AlumnosConDistribucionActual);
-
                                 $ContarAlumnos=$Mox->SumarCantidad($AlumnosConDistribucionActual,$AlumnosSinTutor);
                                 $ContarDocentes=$Mox->SumarCantidadDocente($AlumnosConDistribucionActual);
                                 $CantidadBalanceada=intdiv($ContarAlumnos,$ContarDocentes);
                                 $ResiduoDelBalanceo=$ContarAlumnos % $ContarDocentes;
-
-                                #$DistribucionEnArrayMulti=$Mox->ArregloMulti($AlumnosConDistribucionActual);
+                                print $CantidadBalanceada;
+                                print " ";
+                                print $ContarAlumnos % $ContarDocentes;
                                 
-                                //Distribucion balanceada o equitativa de estudiantes
-                                $TablaDistribucionDocenteAlumno=$Mox->CrearDistribucion2022I($AlumnosConDistribucionActual);
-                                $Mox->Balancear($TablaDistribucionDocenteAlumno,$AlumnosSinTutor);   
+                                #$DistribucionEnArrayMulti=$Mox->ArregloMulti($AlumnosConDistribucionActual);
+                                $Mox->Imprimir($AlumnosConDistribucionActual);
                             ?>
                             </tbody>
                         </table>

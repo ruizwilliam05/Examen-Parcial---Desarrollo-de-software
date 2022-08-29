@@ -56,8 +56,7 @@ class Funciones{
                             $Arreglo[$fila][1]=$datos[1];
                         }
                         $fila++;
-                    }
-                    
+                    }                   
                 }
                 fclose($gestor);
             }
@@ -72,45 +71,6 @@ class Funciones{
             }
         }
     }
-
-    function CrearDistribucion2022I($Array)
-    {
-        if(!empty($Array)){
-
-            $Pos=0;
-
-            for($row = 0; $row < count($Array); $row++){
-                
-                if($Array[$row][0]=='Docente')
-                {
-
-                    $DocenteACargo=$Array[$row][1];
-                    $row=$row+1;
-                }
-                $AlumnoXDocente[$Pos][0]=$Pos+1;
-                $AlumnoXDocente[$Pos][1]=$DocenteACargo;
-                $AlumnoXDocente[$Pos][2]=$Array[$row][0];
-                $AlumnoXDocente[$Pos][3]=$Array[$row][1];
-                $Pos++;
-            }
-        }
-        return $AlumnoXDocente;
-        
-    }
-
-
-    function Balancear($DistribucionDocenteAlumno,$AlumnosSinTutor)
-    {
-        
-        if(!empty($DistribucionDocenteAlumno)){
-            for($row = 0; $row < count($DistribucionDocenteAlumno); $row++){
-                echo '<tr><th>'.$DistribucionDocenteAlumno[$row][0].'</th><th>'.$DistribucionDocenteAlumno[$row][1].'</th><th>'.$DistribucionDocenteAlumno[$row][2].'</th><th>'.$DistribucionDocenteAlumno[$row][3].'</th></tr>';
-            }
-        }
-        
-        
-    }
-
     function Diferencia($ArrA,$ArrB){
         $fila=0;
         $Arreglo=array();
@@ -177,8 +137,7 @@ class Funciones{
         $Contador=-1;
         $Arreglo=array();
         while($y<count($ArrA))
-        {
-               
+        {              
             if($ArrA[$y][0]=="Docente"){
                 $Contador=$Contador+1;
                 $Arreglo[$Contador][$y][0]=$ArrA[$y][0];
@@ -186,38 +145,27 @@ class Funciones{
             }
 
             else{
-
                 $Arreglo[$Contador][$y][0]=$ArrA[$y][0];
                 $Arreglo[$Contador][$y][1]=$ArrA[$y][1];
             }
             $y=$y+1;
-        }
-                    
+        }         
         return $Arreglo;
     }
-
     function Imprimir_ArregloMulti($ArrA){
         $y=0;
         $Contador=-1;
        
-        while($y<count($ArrA))
-        {
-               
+        while($y<count($ArrA)){              
             if($ArrA[$Contador+1][$y][0]=="Docente"){
                 $Contador=$Contador+1;
                 echo '<tr><th>'.$y.'</th><th>'.$ArrA[$Contador][$y][0].'</th><th>'.$ArrA[$Contador][$y][1].'</th></tr>';
             }
-
             else{
-
                 echo '<tr><th>'.$y.'</th><th>'.$ArrA[$Contador][$y][0].'</th><th>'.$ArrA[$Contador][$y][1].'</th></tr>';
             }
             $y=$y+1;
         }
     }
-
-    
-
-
 }
 ?>
