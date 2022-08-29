@@ -237,13 +237,7 @@
                                 
                                 //Distribucion balanceada o equitativa de estudiantes
                                 $TablaDistribucionDocenteAlumno=$Mox->CrearDistribucion2022I($AlumnosConDistribucionActual);
-                                
-                                $NuevaTabla=$Mox->NumeroTutoradosXDocente($TablaDistribucionDocenteAlumno);
-                                $Mox->Balancear($TablaDistribucionDocenteAlumno,$AlumnosSinTutor);
-
-                                
-                                
-                                
+                                $Mox->Balancear($TablaDistribucionDocenteAlumno,$AlumnosSinTutor);   
                             ?>
                             </tbody>
                         </table>

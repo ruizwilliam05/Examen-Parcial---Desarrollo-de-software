@@ -111,35 +111,6 @@ class Funciones{
         
     }
 
-    function NumeroTutoradosXDocente($Array)
-    {
-        $Docente=$Array[0][1];
-        $Cantidad=0;
-        $Cont=0;
-        for($row=0; $row<count($Array); $row++)
-        {
-            if($Array[$row][1]==$Docente) $Cantidad++;
-            if($Array[$row][1]!=$Docente)
-            {
-                $TablaCantidad[$Cont][0]=$Docente;
-                $TablaCantidad[$Cont][1]=$Cantidad;
-                $Cont+=1;
-                $Docente=$Array[$row][1];
-                $Cantidad=1;
-            }
-            if($row==530) 
-            {
-                $TablaCantidad[$Cont][0]=$Docente;
-                $TablaCantidad[$Cont][1]=$Cantidad;
-            }
-        }
-        
-        return $TablaCantidad;
-
-    }
-
-
-
     function Diferencia($ArrA,$ArrB){
         $fila=0;
         $Arreglo=array();
