@@ -21,11 +21,11 @@
                 <div class="mb-3">
                     <form action="index.php" method="post" enctype="multipart/form-data">
                             <label for="formFile" class="form-label">Lista de Matriculados de este semestre (.csv)</label>
-                            <input class="form-control mb-3" name="archivo" type="file" id="formFile">
+                            <input class="form-control mb-3" name="ListaDeMatriculadosActual" type="file" id="formFile">
                             <label for="formFile" class="form-label">Distribución de Tutorados del anterior semestre (.csv)</label>
-                            <input class="form-control mb-3" name="archivo1" type="file" id="formFile">
+                            <input class="form-control mb-3" name="ListaDeDistribucionAnterior" type="file" id="formFile">
                             <label for="formFile" class="form-label">Lista de Docentes activos de este semestre (.csv)</label>
-                            <input class="form-control mb-3" name="archivo2" type="file" id="formFile">
+                            <input class="form-control mb-3" name="ListaDeDocentes" type="file" id="formFile">
                             <input type="submit" class="btn btn-primary" value="Cargar Archivos">
                     </form>
                 </div>
@@ -48,10 +48,10 @@
                             <tbody>
                                 <?php
                                     include 'Librerias.php';
-                                    if (!isset($_FILES["archivo"])) {
+                                    if (!isset($_FILES["ListaDeMatriculadosActual"])) {
                                         throw new Exception("Selecciona un archivo CSV válido.");
                                     }
-                                    $file     = $_FILES["archivo"];
+                                    $file     = $_FILES["ListaDeMatriculadosActual"];
                                     $Mox=new Funciones();
                                     $Arreglo_Matriculados=$Mox->csv_Array($file);
                                     $Mox->Imprimir($Arreglo_Matriculados);
@@ -71,10 +71,10 @@
                             </thead>
                             <tbody>
                             <?php
-                                if (!isset($_FILES["archivo1"])) {
+                                if (!isset($_FILES["ListaDeDistribucionAnterior"])) {
                                     throw new Exception("Selecciona un archivo CSV válido.");
                                 }
-                                $file1     = $_FILES["archivo1"];
+                                $file1     = $_FILES["ListaDeDistribucionAnterior"];
                                 $Mox=new Funciones();
                                 $Arreglo_Dis_Anterior=$Mox->csv_Array($file1);
                             ?>
@@ -93,10 +93,10 @@
                             </thead>
                             <tbody>
                             <?php
-                                if (!isset($_FILES["archivo1"])) {
+                                if (!isset($_FILES["ListaDeDistribucionAnterior"])) {
                                     throw new Exception("Selecciona un archivo CSV válido.");
                                 }
-                                $file1     = $_FILES["archivo1"];
+                                $file1     = $_FILES["ListaDeDistribucionAnterior"];
                                 $Mox=new Funciones();
                                 $Arreglo_Dis_Anterior_AlumnoDocente=$Mox->csv_Array_Distribucion($file1);
                             ?>
@@ -115,10 +115,10 @@
                             </thead>
                             <tbody>
                             <?php
-                                if (!isset($_FILES["archivo2"])) {
+                                if (!isset($_FILES["ListaDeDocentes"])) {
                                     throw new Exception("Selecciona un archivo CSV válido.");
                                 }
-                                $file2     = $_FILES["archivo2"];
+                                $file2     = $_FILES["ListaDeDocentes"];
                                 $Mox=new Funciones();
                                 $Arreglo_Dis_Docentes=$Mox->csv_Array($file2);
                             ?>
