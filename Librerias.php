@@ -192,25 +192,28 @@ class Funciones{
 
     }
 
-    function Diferencia($ArrA,$ArrB){
+    function DiferenciaListaA_ListaB($ArrayA,$ArrayB){
         $fila=0;
         $Arreglo=array();
-        for($x = 0; $x < count($ArrA); $x++){
+        for($x = 0; $x < count($ArrayA); $x++){
             $Existe=false;
-            for($y = 0; $y < count($ArrB); $y++){
-                if($ArrA[$x][0]==$ArrB[$y][0]){
+            for($y = 0; $y < count($ArrayB); $y++){
+                if($ArrayA[$x][0]==$ArrayB[$y][0]){
                     $Existe=true;
                     break;
                 }
             }
             if($Existe==false){
-                $Arreglo[$fila][0]=$ArrA[$x][0];
-                $Arreglo[$fila][1]=$ArrA[$x][1];
+                $Arreglo[$fila][0]=$ArrayA[$x][0];
+                $Arreglo[$fila][1]=$ArrayA[$x][1];
                 $fila++;
             }
         }
         return $Arreglo;
     }
+
+    
+
     function EliminarInactivos($ArrA,$ArrB){
         $fila=0;
         $Arreglo=array();

@@ -172,9 +172,7 @@
                             </thead>
                             <tbody>
                             <?php
-                                $AlumnosSinTutor=$Mox->Diferencia($Arreglo_Matriculados,$Arreglo_Dis_Anterior);
-                                #$Mox->Imprimir($Arreglo_Matriculados);
-                                //$Mox->Imprimir($AlumnosSinTutor);
+                                $AlumnosSinTutor=$Mox->DiferenciaListaA_ListaB($Arreglo_Matriculados,$Arreglo_Dis_Anterior);
 
                             ?>
                             </tbody>
@@ -194,7 +192,7 @@
                             <tbody>
                             <?php
                                 
-                                $AlumnosSinMatricula=$Mox->Diferencia($Arreglo_Dis_Anterior,$Arreglo_Matriculados);
+                                $AlumnosSinMatricula=$Mox->DiferenciaListaA_ListaB($Arreglo_Dis_Anterior,$Arreglo_Matriculados);
                                 #$Mox->Imprimir($Arreglo_Dis_Anterior);
                                 $Mox->Imprimir($AlumnosSinMatricula);
                             ?>
@@ -215,7 +213,6 @@
                             </thead>
                             <tbody>
                             <?php
-                                #$AlumnosSinMatricula=$Mox->Diferencia($Arreglo_Dis_Anterior,$Arreglo_Matriculados);
                                 $AlumnosConDistribucionActual=$Mox->EliminarInactivos($Arreglo_Dis_Anterior_AlumnoDocente,$AlumnosSinMatricula);
                                 $TablaDistribucionDocenteAlumno=$Mox->CrearDistribucion2022I($AlumnosConDistribucionActual);
                                 $Mox->Balancear($TablaDistribucionDocenteAlumno,$AlumnosSinTutor);
