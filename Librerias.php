@@ -22,8 +22,7 @@ class Funciones{
                         }
                         else{
                             $Arreglo[$fila][0]=$datos[1];
-                            $Arreglo[$fila][1]=$datos[2];
-                            
+                            $Arreglo[$fila][1]=$datos[2];      
                         }
                         $fila++;
                     }
@@ -71,7 +70,6 @@ class Funciones{
                 echo '<tr><th>'.$Pos.'</th><th>'.$Array[$row][0].'</th><th>'.$Array[$row][1].'</th></tr>';
             }
         }
-
         //Generar archivo csv en carpeta Archivos Exportados
         $archivo = 'Archivos_Exportados/Alumnos_No_Considerados_Tutoria.csv';
         $fp = fopen($archivo, 'w');
@@ -103,10 +101,8 @@ class Funciones{
                 $Pos++;
             }
         }
-        return $AlumnoXDocente;
-        
+        return $AlumnoXDocente;     
     } 
-
 
     function Balancear($DistribucionDocenteAlumno,$AlumnosSinTutor)
     {
@@ -129,19 +125,16 @@ class Funciones{
                 $DocenteActual=$DistribucionDocenteAlumno[$row][1];
                 if(count($DistribucionDocenteAlumno)!=$next)
                 $DocenteSiguiente=$DistribucionDocenteAlumno[$next][1];
-                
-                
+                      
                 if($DocenteActual!=$DocenteSiguiente && $row3!=count($AlumnosSinTutor))
-                {
-                    
+                {    
                     $Distribucion2022I[$row2][1]=$DocenteActual; //Doncente a cargo
                     $Distribucion2022I[$row2][2]=$AlumnosSinTutor[$row3][0]; //Cpdigo
                     $Distribucion2022I[$row2][3]=$AlumnosSinTutor[$row3][1]; //Nombre
                     $row2+=1;
                     $row3+=1;
                 }
-            }
-            
+            }    
             #echo $DocenteSiguiente;
             
         }
@@ -151,8 +144,6 @@ class Funciones{
             echo '<tr><th>'.$contador.'</th><th>'.$Distribucion2022I[$row][1].'</th><th>'.$Distribucion2022I[$row][2].'</th><th>'.$Distribucion2022I[$row][3].'</th></tr>';
         }
 
-
-
         //Generar lista balanceada
         $archivo = 'Archivos_Exportados/Distribucion-Balanceada.csv';
         $fp = fopen($archivo, 'w');
@@ -160,8 +151,7 @@ class Funciones{
         foreach ($Distribucion2022I as $campos) {
             fputcsv($fp, $campos);
         }
-        fclose($fp);
-        
+        fclose($fp);      
         
     }
 
@@ -186,8 +176,7 @@ class Funciones{
                 $TablaCantidad[$Cont][0]=$Docente;
                 $TablaCantidad[$Cont][1]=$Cantidad;
             }
-        }
-        
+        }  
         return $TablaCantidad;
 
     }
@@ -211,8 +200,6 @@ class Funciones{
         }
         return $Arreglo;
     }
-
-    
 
     function EliminarInactivos($ArrA,$ArrB){
         $fila=0;
