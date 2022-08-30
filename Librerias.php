@@ -55,8 +55,7 @@ class Funciones{
                             $Arreglo[$fila][1]=$datos[1];
                         }
                         $fila++;
-                    }
-                    
+                    }                   
                 }
                 fclose($gestor);
             }
@@ -76,8 +75,7 @@ class Funciones{
         foreach ($Array as $campos) {
             fputcsv($fp, $campos);
         }
-        fclose($fp);
-        
+        fclose($fp);     
     }
 
     function CrearDistribucion2022I($Array)
@@ -90,7 +88,6 @@ class Funciones{
                 
                 if($Array[$row][0]=='Docente')
                 {
-
                     $DocenteACargo=$Array[$row][1];
                     $row=$row+1;
                 }
@@ -135,8 +132,7 @@ class Funciones{
                     $row3+=1;
                 }
             }    
-            #echo $DocenteSiguiente;
-            
+            #echo $DocenteSiguiente;         
         }
         //Imprimir
         for($row = 0; $row < count($Distribucion2022I); $row++){
@@ -151,8 +147,7 @@ class Funciones{
         foreach ($Distribucion2022I as $campos) {
             fputcsv($fp, $campos);
         }
-        fclose($fp);      
-        
+        fclose($fp);          
     }
 
     function NumeroTutoradosXDocente($Array)
@@ -178,65 +173,64 @@ class Funciones{
             }
         }  
         return $TablaCantidad;
-
     }
 
-    function DiferenciaListaA_ListaB($ArrA,$ArrB){
+    function DiferenciaListaA_ListaB($ArrayA,$ArrayB){
         $fila=0;
         $Arreglo=array();
-        $Arreglo=$this->AgregarElemento($Arreglo,$ArrA,$ArrB,$fila,0);
+        $Arreglo=$this->AgregarElemento($Arreglo,$ArrayA,$ArrayB,$fila,0);
         return $Arreglo;
     }
-    # Funcion donde eliminamos los alumnos inactivos de la distribucion anterior, input: lista de distibucion anterior, lista de alumnos inactivos
-    function EliminarInactivos($ArrA,$ArrB){
+    # Funcion donde eliminamos los alumnos inactivos de la distribucion anterior
+    function EliminarInactivos($ArrayA,$ArrayB){
         $fila=0;
         $Arreglo=array();
-        $Arreglo=$this->AgregarElemento($Arreglo,$ArrA,$ArrB,$fila,1);
+        $Arreglo=$this->AgregarElemento($Arreglo,$ArrayA,$ArrayB,$fila,1);
         return $Arreglo;
     }
 
-    function AgregarElemento($Arreglo,$ArrA,$ArrB,$fila,$Int){
-        for($x = 0; $x < count($ArrA); $x++){
+    function AgregarElemento($Arreglo,$ArrayA,$ArrayB,$fila,$Int){
+        for($x = 0; $x < count($ArrayA); $x++){
             $Existe=false;
-            for($y = 0; $y < count($ArrB); $y++){
+            for($y = 0; $y < count($ArrayB); $y++){
                 if($Int==1){
-                    if($ArrA[$x][0]==$ArrB[$y][0] and $ArrA[$x][0]!="Docente"){
+                    if($ArrayA[$x][0]==$ArrayB[$y][0] and $ArrayA[$x][0]!="Docente"){
                         $Existe=true;
                         break;
                     }
                 }
                 else{
-                    if($ArrA[$x][0]==$ArrB[$y][0] and $Int==0){
+                    if($ArrayA[$x][0]==$ArrayB[$y][0] and $Int==0){
                         $Existe=true;
                         break;
                     }
                 }
             }
             if($Existe==false){
-                $Arreglo[$fila][0]=$ArrA[$x][0];
-                $Arreglo[$fila][1]=$ArrA[$x][1];
+                $Arreglo[$fila][0]=$ArrayA[$x][0];
+                $Arreglo[$fila][1]=$ArrayA[$x][1];
                 $fila++;
             }
         }
         return $Arreglo;
     }
 
-    function SumarCantidad($ArrA,$ArrB){
+    function SumarCantidad($ArrayA,$ArrayB){
         $Contador=0;
-        for($x = 0; $x < count($ArrA); $x++){
+        for($x = 0; $x < count($ArrayA); $x++){
           
-            if($ArrA[$x][0]!="Docente"){
+            if($ArrayA[$x][0]!="Docente"){
                 $Contador=$Contador+1;
             }    
         }
-        $Contador=$Contador+count($ArrB)-1;
+        $Contador=$Contador+count($ArrayB)-1;
         return $Contador;
     }
-    function SumarCantidadDocente($ArrA){
+    function SumarCantidadDocente($ArrayA){
         $Contador=0;
-        for($x = 0; $x < count($ArrA); $x++){
+        for($x = 0; $x < count($ArrayA); $x++){
           
-            if($ArrA[$x][0]=="Docente"){
+            if($ArrayA[$x][0]=="Docente"){
                 $Contador=$Contador+1;
             }    
         }
