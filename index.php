@@ -17,7 +17,7 @@
             </center>
             <h3 class="pb-3 pt-5">Agregar Archivos</h3>
             
-            <!-- Para Agregar CSV -->
+            <!-- Para Agregar CSV MODIFICADO -->
             <div class="col-6 pb-3">
                 <div class="mb-3">
                     <form action="index.php" method="post" enctype="multipart/form-data">
