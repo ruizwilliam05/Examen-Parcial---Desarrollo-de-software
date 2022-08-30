@@ -56,7 +56,8 @@ class Funciones{
                             $Arreglo[$fila][1]=$datos[1];
                         }
                         $fila++;
-                    }                   
+                    }
+                    
                 }
                 fclose($gestor);
             }
@@ -70,7 +71,138 @@ class Funciones{
                 echo '<tr><th>'.$Pos.'</th><th>'.$Array[$row][0].'</th><th>'.$Array[$row][1].'</th></tr>';
             }
         }
+
+        //Generar archivo csv en carpeta Archivos Exportados
+        $archivo = 'Archivos_Exportados/Alumnos_No_Considerados_Tutoria.csv';
+        $fp = fopen($archivo, 'w');
+        foreach ($Array as $campos) {
+            fputcsv($fp, $campos);
+        }
+        fclose($fp);
+        
     }
+
+    function CrearDistribucion2022I($Array)
+    {
+        if(!empty($Array)){
+
+            $Pos=0;
+
+            for($row = 0; $row < count($Array); $row++){
+                
+                if($Array[$row][0]=='Docente')
+                {
+
+                    $DocenteACargo=$Array[$row][1];
+                    $row=$row+1;
+                }
+                $AlumnoXDocente[$Pos][0]=$Pos+1;
+                $AlumnoXDocente[$Pos][1]=$DocenteACargo;
+                $AlumnoXDocente[$Pos][2]=$Array[$row][0];
+                $AlumnoXDocente[$Pos][3]=$Array[$row][1];
+                $Pos++;
+            }
+        }
+        return $AlumnoXDocente;
+        
+    }
+
+
+    function Balancear($DistribucionDocenteAlumno,$AlumnosSinTutor)
+    {
+        //echo '<tr><th>'.$DistribucionDocenteAlumno[1][1].'</th></tr>';
+        //Crear Array donde se almacenará la distribucion balanceada
+        
+        /*
+        if(!empty($DistribucionDocenteAlumno)){
+            for($row = 0; $row < count($DistribucionDocenteAlumno); $row++){
+                $contador=$row+1;
+                //echo '<tr><th>'.$contador.'</th><th>'.$DistribucionDocenteAlumno[$row][1].'</th><th>'.$DistribucionDocenteAlumno[$row][2].'</th><th>'.$DistribucionDocenteAlumno[$row][3].'</th></tr>';
+            }
+        }
+        */
+        //Balanceo
+        if(!empty($DistribucionDocenteAlumno) && !empty($AlumnosSinTutor))
+        {
+            //Doncente actual
+            $DocenteSiguiente=$DistribucionDocenteAlumno[0][1];
+            $row2=0;
+            $row3=0;
+            for($row = 0; $row < 531; $row++)
+            {
+                
+                $Distribucion2022I[$row2][1]=$DistribucionDocenteAlumno[$row][1]; //Doncente a cargo
+                $Distribucion2022I[$row2][2]=$DistribucionDocenteAlumno[$row][2]; //Cpdigo
+                $Distribucion2022I[$row2][3]=$DistribucionDocenteAlumno[$row][3]; //Nombre
+                $row2+=1;
+
+                $next=$row+1;
+                $DocenteActual=$DistribucionDocenteAlumno[$row][1];
+                if(count($DistribucionDocenteAlumno)!=$next)
+                $DocenteSiguiente=$DistribucionDocenteAlumno[$next][1];
+                
+                
+                if($DocenteActual!=$DocenteSiguiente && $row3!=count($AlumnosSinTutor))
+                {
+                    
+                    $Distribucion2022I[$row2][1]=$DocenteActual; //Doncente a cargo
+                    $Distribucion2022I[$row2][2]=$AlumnosSinTutor[$row3][0]; //Cpdigo
+                    $Distribucion2022I[$row2][3]=$AlumnosSinTutor[$row3][1]; //Nombre
+                    $row2+=1;
+                    $row3+=1;
+                }
+            }
+            
+            #echo $DocenteSiguiente;
+            
+        }
+        //Imprimir
+        for($row = 0; $row < count($Distribucion2022I); $row++){
+            $contador=$row+1;
+            echo '<tr><th>'.$contador.'</th><th>'.$Distribucion2022I[$row][1].'</th><th>'.$Distribucion2022I[$row][2].'</th><th>'.$Distribucion2022I[$row][3].'</th></tr>';
+        }
+
+
+
+        //Generar lista balanceada
+        $archivo = 'Archivos_Exportados/Distribucion-Balanceada.csv';
+        $fp = fopen($archivo, 'w');
+        #$fp = fopen('php://output');
+        foreach ($Distribucion2022I as $campos) {
+            fputcsv($fp, $campos);
+        }
+        fclose($fp);
+        
+        
+    }
+
+    function NumeroTutoradosXDocente($Array)
+    {
+        $Docente=$Array[0][1];
+        $Cantidad=0;
+        $Cont=0;
+        for($row=0; $row<count($Array); $row++)
+        {
+            if($Array[$row][1]==$Docente) $Cantidad++;
+            if($Array[$row][1]!=$Docente)
+            {
+                $TablaCantidad[$Cont][0]=$Docente;
+                $TablaCantidad[$Cont][1]=$Cantidad;
+                $Cont+=1;
+                $Docente=$Array[$row][1];
+                $Cantidad=1;
+            }
+            if($row==530) 
+            {
+                $TablaCantidad[$Cont][0]=$Docente;
+                $TablaCantidad[$Cont][1]=$Cantidad;
+            }
+        }
+        
+        return $TablaCantidad;
+
+    }
+
     function Diferencia($ArrA,$ArrB){
         $fila=0;
         $Arreglo=array();
@@ -131,13 +263,15 @@ class Funciones{
         }
         return $Contador;
     }
-
+    
+    /*
     function ArregloMulti($ArrA){
         $y=0;
         $Contador=-1;
         $Arreglo=array();
         while($y<count($ArrA))
-        {              
+        {
+               
             if($ArrA[$y][0]=="Docente"){
                 $Contador=$Contador+1;
                 $Arreglo[$Contador][$y][0]=$ArrA[$y][0];
@@ -145,27 +279,54 @@ class Funciones{
             }
 
             else{
+
                 $Arreglo[$Contador][$y][0]=$ArrA[$y][0];
                 $Arreglo[$Contador][$y][1]=$ArrA[$y][1];
             }
             $y=$y+1;
-        }         
+        }
+                    
         return $Arreglo;
     }
+
     function Imprimir_ArregloMulti($ArrA){
         $y=0;
         $Contador=-1;
-       
-        while($y<count($ArrA)){              
+        //Crear arreglo 
+        $ArregloNuevo=array();
+
+        while($y<count($ArrA))
+        {
+               
             if($ArrA[$Contador+1][$y][0]=="Docente"){
                 $Contador=$Contador+1;
-                echo '<tr><th>'.$y.'</th><th>'.$ArrA[$Contador][$y][0].'</th><th>'.$ArrA[$Contador][$y][1].'</th></tr>';
+                //echo '<tr><th>'.$y.'</th><th>'.$ArrA[$Contador][$y][0].'</th><th>'.$ArrA[$Contador][$y][1].'</th></tr>';
+                echo '<tr><th>'.$ArrA[$Contador][$y][0].'</th><th>';
             }
+
             else{
-                echo '<tr><th>'.$y.'</th><th>'.$ArrA[$Contador][$y][0].'</th><th>'.$ArrA[$Contador][$y][1].'</th></tr>';
+
+                //echo '<tr><th>'.$y.'</th><th>'.$ArrA[$Contador][$y][0].'</th><th>'.$ArrA[$Contador][$y][1].'</th></tr>';
             }
             $y=$y+1;
         }
+
+        //Crear arreglo 
+
+        
+        $archivo = 'Descarga-DistribucionTutorados.csv';
+        $fp = fopen($archivo, 'w');
+        foreach ($ArrA as $campos) {
+            fputcsv($fp, $campos);
+        }
+        fclose($fp);
+        
     }
+    */
+    
+
+
 }
+
+#header('location:../index.php');
 ?>

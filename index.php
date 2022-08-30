@@ -30,6 +30,7 @@
                             <label for="formFile" class="form-label">Lista de Docentes activos de este semestre (.csv)</label>
                             <input class="form-control mb-3" name="archivo2" type="file" id="formFile">
                             
+
                             <input type="submit" class="btn btn-primary" value="Cargar Archivos">
                     </form>
                 </div>
@@ -45,7 +46,7 @@
                             <thead>
                             <tr>
                                 <th>Numero</th>
-                                <th>Codigo</th>
+                                <th>codigo</th>
                                 <th>Nombre</th>
                                 <!--<th>Estado</th>-->
                             </tr>
@@ -150,31 +151,28 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 text p-3">
+            <div class="col-12 text p-2">
                 <h3 class="pb-3">Resultados</h3>
                 <!-- Resultados -->
                 <!-- Nav tabs -->
-                <ul class="nav nav-tabs pb-3">
+                <ul class="nav nav-tabs pb-2">
+                    
                     <li class="nav-item">
-                        <a class="nav-link " data-bs-toggle="tab" href="#AST">Alumnos Sin Tutor</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#AI">Alumnos No Considerados en Tutoria</a>
+                        
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#AI">Alumnos Inactivos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#DT">Distribucion de Tutorados</a>
+                        <a class="nav-link" data-bs-toggle="tab" href="#DT">Distribucion Balanceada</a>
                     </li>
                 </ul>
 
                 <!-- Tab panes -->
-                <div class="tab-content p-3">
+                <div class="tab-content p-2">
                     <div class="tab-pane container active" id="AST">
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>Numero</th>
-                                <th>Codigo</th>
-                                <th>Nombre</th>
+                                
                                  <!--<th>Estado</th>-->
                             </tr>
                             </thead>
@@ -182,13 +180,14 @@
                             <?php
                                 $AlumnosSinTutor=$Mox->Diferencia($Arreglo_Matriculados,$Arreglo_Dis_Anterior);
                                 #$Mox->Imprimir($Arreglo_Matriculados);
-                                $Mox->Imprimir($AlumnosSinTutor);
+                                //$Mox->Imprimir($AlumnosSinTutor);
 
                             ?>
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane container fade" id="AI">
+                    <div class="tab-pane container fade" id="AI"> <!--Alumnos no considerados en tutoria-->
+                    <a href=Archivos_Exportados/Alumnos_No_Considerados_Tutoria.csv>Descargar Lista CSV</a>
                         <table class="table">
                             <thead>
                             <tr>
@@ -208,11 +207,13 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane container fade" id="DT">
+                    <div class="tab-pane container fade" id="DT"> <!--Distribucion balanceada-->
+                    <a href=Archivos_Exportados/Distribucion-Balanceada.csv>Descargar Lista CSV</a>
                         <table class="table">
                             <thead>
                             <tr>
                                 <th>Numero</th>
+                                <th>Docente a Cargo</th>
                                 <th>Codigo</th>
                                 <th>Nombre</th>
                                  <!--<th>Estado</th>-->
@@ -222,18 +223,8 @@
                             <?php
                                 #$AlumnosSinMatricula=$Mox->Diferencia($Arreglo_Dis_Anterior,$Arreglo_Matriculados);
                                 $AlumnosConDistribucionActual=$Mox->EliminarInactivos($Arreglo_Dis_Anterior_AlumnoDocente,$AlumnosSinMatricula);
-                        
-                                #$Mox->Imprimir($AlumnosConDistribucionActual);
-                                $ContarAlumnos=$Mox->SumarCantidad($AlumnosConDistribucionActual,$AlumnosSinTutor);
-                                $ContarDocentes=$Mox->SumarCantidadDocente($AlumnosConDistribucionActual);
-                                $CantidadBalanceada=intdiv($ContarAlumnos,$ContarDocentes);
-                                $ResiduoDelBalanceo=$ContarAlumnos % $ContarDocentes;
-                                print $CantidadBalanceada;
-                                print " ";
-                                print $ContarAlumnos % $ContarDocentes;
-                                
-                                #$DistribucionEnArrayMulti=$Mox->ArregloMulti($AlumnosConDistribucionActual);
-                                $Mox->Imprimir($AlumnosConDistribucionActual);
+                                $TablaDistribucionDocenteAlumno=$Mox->CrearDistribucion2022I($AlumnosConDistribucionActual);
+                                $Mox->Balancear($TablaDistribucionDocenteAlumno,$AlumnosSinTutor);
                             ?>
                             </tbody>
                         </table>
