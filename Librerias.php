@@ -214,27 +214,5 @@ class Funciones{
         }
         return $Arreglo;
     }
-
-    function SumarCantidad($ArrayA,$ArrayB){
-        $Contador=0;
-        for($x = 0; $x < count($ArrayA); $x++){
-          
-            if($ArrayA[$x][0]!="Docente"){
-                $Contador=$Contador+1;
-            }    
-        }
-        $Contador=$Contador+count($ArrayB)-1;
-        return $Contador;
-    }
-    function SumarCantidadDocente($ArrayA){
-        $Contador=0;
-        for($x = 0; $x < count($ArrayA); $x++){
-          
-            if($ArrayA[$x][0]=="Docente"){
-                $Contador=$Contador+1;
-            }    
-        }
-        return $Contador;
-    }
 }
 ?>
