@@ -16,6 +16,7 @@
                 <h2>ESCUELA PROFESIONAL DE INGENIERIA INFORMATICA Y DE SISTEMAS</h2>
             </center>
             <h3 class="pb-3 pt-5">Agregar Archivos</h3>
+            
             <!-- Para Agregar CSV -->
             <div class="col-6 pb-3">
                 <div class="mb-3">
@@ -29,7 +30,6 @@
 
                             <label for="formFile" class="form-label">Lista de Docentes activos de este semestre (.csv)</label>
                             <input class="form-control mb-3" name="archivo2" type="file" id="formFile">
-                            
 
                             <input type="submit" class="btn btn-primary" value="Cargar Archivos">
                     </form>
@@ -38,8 +38,6 @@
         </div>
         <div class="row">
             <div class="col-12 p-3">
-
-                <!-- Tab panes -->
                 <div class="tab-content p-3">
                     <div class="tab-pane container" id="Alumno">
                         <table class="table">
@@ -48,7 +46,6 @@
                                 <th>Numero</th>
                                 <th>codigo</th>
                                 <th>Nombre</th>
-                                <!--<th>Estado</th>-->
                             </tr>
                             </thead>
                             <tbody>
@@ -76,7 +73,6 @@
                                 <th>Numero</th>
                                 <th>Codigo</th>
                                 <th>Nombre</th>
-                                <!--<th>Estado</th>-->
                             </tr>
                             </thead>
                             <tbody>
@@ -90,7 +86,6 @@
                                 
                                 $Mox=new Funciones();
                                 $Arreglo_Dis_Anterior=$Mox->csv_Array($file1);
-                                #$Mox->Imprimir($Arreglo_Dis_Docentes);
                             ?>
                             </tbody>
                         </table>
@@ -102,7 +97,6 @@
                                 <th>Numero</th>
                                 <th>Codigo</th>
                                 <th>Nombre</th>
-                                <!--<th>Estado</th>-->
                             </tr>
                             </thead>
                             <tbody>
@@ -113,11 +107,8 @@
                                 $file     = $_FILES["archivo"];
                                 $file1     = $_FILES["archivo1"];
                                 $file2     = $_FILES["archivo2"];
-                                
                                 $Mox=new Funciones();
-                                #$Arreglo_Dis_Docentes=$Mox->csv_Array($file2);
                                 $Arreglo_Dis_Anterior_AlumnoDocente=$Mox->csv_Array_Distribucion($file1);
-                                #$Mox->Imprimir($Arreglo_Dis_Anterior);
                             ?>
                             </tbody>
                         </table>
@@ -129,7 +120,6 @@
                                 <th>Numero</th>
                                 <th>Codigo</th>
                                 <th>Nombre</th>
-                                <!--<th>Estado</th>-->
                             </tr>
                             </thead>
                             <tbody>
@@ -140,11 +130,8 @@
                                 $file     = $_FILES["archivo"];
                                 $file1     = $_FILES["archivo1"];
                                 $file2     = $_FILES["archivo2"];
-                                
                                 $Mox=new Funciones();
                                 $Arreglo_Dis_Docentes=$Mox->csv_Array($file2);
-                                
-                                #$Mox->Imprimir($Arreglo_Dis_Anterior);
                             ?>
                             </tbody>
                         </table>
@@ -153,35 +140,20 @@
             </div>
             <div class="col-12 text p-2">
                 <h3 class="pb-3">Resultados</h3>
-                <!-- Resultados -->
-                <!-- Nav tabs -->
                 <ul class="nav nav-tabs pb-2">
-                    
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" href="#AI">Alumnos No Considerados en Tutoria</a>
-                        
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" href="#DT">Distribucion Balanceada</a>
                     </li>
                 </ul>
-
-                <!-- Tab panes -->
                 <div class="tab-content p-2">
                     <div class="tab-pane container active" id="AST">
                         <table class="table">
-                            <thead>
-                            <tr>
-                                
-                                 <!--<th>Estado</th>-->
-                            </tr>
-                            </thead>
                             <tbody>
                             <?php
                                 $AlumnosSinTutor=$Mox->Diferencia($Arreglo_Matriculados,$Arreglo_Dis_Anterior);
-                                #$Mox->Imprimir($Arreglo_Matriculados);
-                                //$Mox->Imprimir($AlumnosSinTutor);
-
                             ?>
                             </tbody>
                         </table>
@@ -194,14 +166,11 @@
                                 <th>Numero</th>
                                 <th>Codigo</th>
                                 <th>Nombre</th>
-                                 <!--<th>Estado</th>-->
                             </tr>
                             </thead>
                             <tbody>
-                            <?php
-                                
+                            <?php  
                                 $AlumnosSinMatricula=$Mox->Diferencia($Arreglo_Dis_Anterior,$Arreglo_Matriculados);
-                                #$Mox->Imprimir($Arreglo_Dis_Anterior);
                                 $Mox->Imprimir($AlumnosSinMatricula);
                             ?>
                             </tbody>
@@ -216,12 +185,10 @@
                                 <th>Docente a Cargo</th>
                                 <th>Codigo</th>
                                 <th>Nombre</th>
-                                 <!--<th>Estado</th>-->
                             </tr>
                             </thead>
                             <tbody>
                             <?php
-                                #$AlumnosSinMatricula=$Mox->Diferencia($Arreglo_Dis_Anterior,$Arreglo_Matriculados);
                                 $AlumnosConDistribucionActual=$Mox->EliminarInactivos($Arreglo_Dis_Anterior_AlumnoDocente,$AlumnosSinMatricula);
                                 $TablaDistribucionDocenteAlumno=$Mox->CrearDistribucion2022I($AlumnosConDistribucionActual);
                                 $Mox->Balancear($TablaDistribucionDocenteAlumno,$AlumnosSinTutor);
