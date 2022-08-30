@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,8 +52,6 @@
                                         throw new Exception("Selecciona un archivo CSV válido.");
                                     }
                                     $file     = $_FILES["archivo"];
-                                    $file1     = $_FILES["archivo1"];
-                                    $file2     = $_FILES["archivo2"];
                                     $Mox=new Funciones();
                                     $Arreglo_Matriculados=$Mox->csv_Array($file);
                                     $Mox->Imprimir($Arreglo_Matriculados);
@@ -78,13 +74,9 @@
                                 if (!isset($_FILES["archivo1"])) {
                                     throw new Exception("Selecciona un archivo CSV válido.");
                                 }
-                                $file     = $_FILES["archivo"];
                                 $file1     = $_FILES["archivo1"];
-                                $file2     = $_FILES["archivo2"];
-                                
                                 $Mox=new Funciones();
                                 $Arreglo_Dis_Anterior=$Mox->csv_Array($file1);
-                                #$Mox->Imprimir($Arreglo_Dis_Docentes);
                             ?>
                             </tbody>
                         </table>
@@ -104,14 +96,9 @@
                                 if (!isset($_FILES["archivo1"])) {
                                     throw new Exception("Selecciona un archivo CSV válido.");
                                 }
-                                $file     = $_FILES["archivo"];
                                 $file1     = $_FILES["archivo1"];
-                                $file2     = $_FILES["archivo2"];
-                                
                                 $Mox=new Funciones();
-                                #$Arreglo_Dis_Docentes=$Mox->csv_Array($file2);
                                 $Arreglo_Dis_Anterior_AlumnoDocente=$Mox->csv_Array_Distribucion($file1);
-                                #$Mox->Imprimir($Arreglo_Dis_Anterior);
                             ?>
                             </tbody>
                         </table>
@@ -131,14 +118,9 @@
                                 if (!isset($_FILES["archivo2"])) {
                                     throw new Exception("Selecciona un archivo CSV válido.");
                                 }
-                                $file     = $_FILES["archivo"];
-                                $file1     = $_FILES["archivo1"];
                                 $file2     = $_FILES["archivo2"];
-                                
                                 $Mox=new Funciones();
                                 $Arreglo_Dis_Docentes=$Mox->csv_Array($file2);
-                                
-                                #$Mox->Imprimir($Arreglo_Dis_Anterior);
                             ?>
                             </tbody>
                         </table>
@@ -159,15 +141,11 @@
                         <a class="nav-link" data-bs-toggle="tab" href="#DT">Distribucion Balanceada</a>
                     </li>
                 </ul>
-
-                <!-- Tab panes -->
                 <div class="tab-content p-2">
                     <div class="tab-pane container active" id="AST">
                         <table class="table">
                             <thead>
                             <tr>
-                                
-                                 <!--<th>Estado</th>-->
                             </tr>
                             </thead>
                             <tbody>
@@ -193,7 +171,6 @@
                             <?php
                                 
                                 $AlumnosSinMatricula=$Mox->DiferenciaListaA_ListaB($Arreglo_Dis_Anterior,$Arreglo_Matriculados);
-                                #$Mox->Imprimir($Arreglo_Dis_Anterior);
                                 $Mox->Imprimir($AlumnosSinMatricula);
                             ?>
                             </tbody>
@@ -208,7 +185,6 @@
                                 <th>Docente a Cargo</th>
                                 <th>Codigo</th>
                                 <th>Nombre</th>
-                                 <!--<th>Estado</th>--> 
                             </tr>
                             </thead>
                             <tbody>
