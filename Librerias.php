@@ -2,6 +2,7 @@
 class Funciones{
     function csv_Array($file){
         $tmp      = $file["tmp_name"];
+        #$filename = $file["name"];
         $size     = $file["size"];
         if ($size < 0) {
             throw new Exception("Selecciona un archivo válido por favor.");
@@ -10,6 +11,7 @@ class Funciones{
             #Vamos abrir los archivos 
             if (($gestor = fopen($tmp, "r")) !== FALSE) {
                 while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
+                    //echo "<p> $numero de campos en la línea $fila: <br /></p>\n";
                     #Creamos un arreglo Bidimencional 
                     $val_doc=substr($datos[0], 0, 7);
                     if(strlen($datos[1])>1 and ($val_doc != "Docente" and strtolower($datos[0]) != "codigo" 
@@ -20,7 +22,8 @@ class Funciones{
                         }
                         else{
                             $Arreglo[$fila][0]=$datos[1];
-                            $Arreglo[$fila][1]=$datos[2];  
+                            $Arreglo[$fila][1]=$datos[2];
+                            
                         }
                         $fila++;
                     }
@@ -31,6 +34,7 @@ class Funciones{
     }
     function csv_Array_Distribucion($file){
         $tmp      = $file["tmp_name"];
+        #$filename = $file["name"];
         $size     = $file["size"];
         if ($size < 0) {
             throw new Exception("Selecciona un archivo válido por favor.");
@@ -39,6 +43,7 @@ class Funciones{
             #Vamos abrir los archivos 
             if (($gestor = fopen($tmp, "r")) !== FALSE) {
                 while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
+                    //echo "<p> $numero de campos en la línea $fila: <br /></p>\n";
                     #Creamos un arreglo Bidimencional 
                     $val_doc=substr($datos[0], 0, 7);
                     if(strlen($datos[1])>1 and (strtolower($datos[0]) != "codigo" and strtolower($datos[1]) != "codigo"  and $datos[0]!="Nuevo Tutorado")){
@@ -51,7 +56,8 @@ class Funciones{
                             $Arreglo[$fila][1]=$datos[1];
                         }
                         $fila++;
-                    } 
+                    }
+                    
                 }
                 fclose($gestor);
             }
@@ -72,7 +78,8 @@ class Funciones{
         foreach ($Array as $campos) {
             fputcsv($fp, $campos);
         }
-        fclose($fp);  
+        fclose($fp);
+        
     }
 
     function CrearDistribucion2022I($Array)
@@ -98,7 +105,7 @@ class Funciones{
         }
         return $AlumnoXDocente;
         
-    }
+    } 
 
 
     function Balancear($DistribucionDocenteAlumno,$AlumnosSinTutor)
@@ -112,16 +119,21 @@ class Funciones{
             $row3=0;
             for($row = 0; $row < 531; $row++)
             {
+                
                 $Distribucion2022I[$row2][1]=$DistribucionDocenteAlumno[$row][1]; //Doncente a cargo
                 $Distribucion2022I[$row2][2]=$DistribucionDocenteAlumno[$row][2]; //Cpdigo
                 $Distribucion2022I[$row2][3]=$DistribucionDocenteAlumno[$row][3]; //Nombre
                 $row2+=1;
+
                 $next=$row+1;
                 $DocenteActual=$DistribucionDocenteAlumno[$row][1];
                 if(count($DistribucionDocenteAlumno)!=$next)
-                $DocenteSiguiente=$DistribucionDocenteAlumno[$next][1]; 
+                $DocenteSiguiente=$DistribucionDocenteAlumno[$next][1];
+                
+                
                 if($DocenteActual!=$DocenteSiguiente && $row3!=count($AlumnosSinTutor))
-                {     
+                {
+                    
                     $Distribucion2022I[$row2][1]=$DocenteActual; //Doncente a cargo
                     $Distribucion2022I[$row2][2]=$AlumnosSinTutor[$row3][0]; //Cpdigo
                     $Distribucion2022I[$row2][3]=$AlumnosSinTutor[$row3][1]; //Nombre
@@ -129,6 +141,9 @@ class Funciones{
                     $row3+=1;
                 }
             }
+            
+            #echo $DocenteSiguiente;
+            
         }
         //Imprimir
         for($row = 0; $row < count($Distribucion2022I); $row++){
@@ -136,13 +151,18 @@ class Funciones{
             echo '<tr><th>'.$contador.'</th><th>'.$Distribucion2022I[$row][1].'</th><th>'.$Distribucion2022I[$row][2].'</th><th>'.$Distribucion2022I[$row][3].'</th></tr>';
         }
 
+
+
         //Generar lista balanceada
         $archivo = 'Archivos_Exportados/Distribucion-Balanceada.csv';
         $fp = fopen($archivo, 'w');
+        #$fp = fopen('php://output');
         foreach ($Distribucion2022I as $campos) {
             fputcsv($fp, $campos);
         }
-        fclose($fp);  
+        fclose($fp);
+        
+        
     }
 
     function NumeroTutoradosXDocente($Array)
@@ -167,7 +187,9 @@ class Funciones{
                 $TablaCantidad[$Cont][1]=$Cantidad;
             }
         }
+        
         return $TablaCantidad;
+
     }
 
     function Diferencia($ArrA,$ArrB){
@@ -189,7 +211,6 @@ class Funciones{
         }
         return $Arreglo;
     }
-
     function EliminarInactivos($ArrA,$ArrB){
         $fila=0;
         $Arreglo=array();
@@ -221,7 +242,6 @@ class Funciones{
         $Contador=$Contador+count($ArrB)-1;
         return $Contador;
     }
-
     function SumarCantidadDocente($ArrA){
         $Contador=0;
         for($x = 0; $x < count($ArrA); $x++){
