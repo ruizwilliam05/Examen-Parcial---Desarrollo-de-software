@@ -15,5 +15,11 @@ En este proyecto se hace uso del refactoring con la finalidad de que el codigo s
 * Archivo CSV con la lista de docentes activos de este semestre.
 * Archivo CSV con la lsta de matriculados de este semestre.
 
+## OUTPUT (Resultado)
+* Lista de estudiantes que ya no son considerados en tutoria
+* Lista de distribucion balanceada de estudiantes y docentes a cargo de la tutoria
+
+
+
 
 
