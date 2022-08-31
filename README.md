@@ -19,6 +19,9 @@ En este proyecto se hace uso del refactoring con la finalidad de que el codigo s
 * Lista de estudiantes que ya no son considerados en tutoria
 * Lista de distribucion balanceada de estudiantes y docentes a cargo de la tutoria
 
+![Imagen](https://user-images.githubusercontent.com/106675975/187582460-6965cd2e-ebf4-48c3-8812-952f3670aa1a.png)
+
+
 
 
 
