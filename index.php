@@ -56,14 +56,10 @@
                                 <?php
                                     include 'Librerias.php';
                                     include 'ArchivoCSV_Array.php';
-
                                     if (!isset($_FILES["ListaDeMatriculadosActual"])) {
                                         throw new Exception("Selecciona un archivo CSV válido.");
                                     }
                                     $file     = $_FILES["ListaDeMatriculadosActual"];
-                                    $file1     = $_FILES["ListaDeDistribucionAnterior"];
-                                    $file2     = $_FILES["ListaDeDocentes"];
-                                    
                                     $Instancia=new ClaseCSV_Array();
                                     $ListaDeAlumnosMatriculados_EnArray=$Instancia->ConvertirArchivo_CSV_a_ListaArray($file,0);
                                 ?>
@@ -85,9 +81,7 @@
                                 if (!isset($_FILES["ListaDeDistribucionAnterior"])) {
                                     throw new Exception("Selecciona un archivo CSV válido.");
                                 }
-                                $file     = $_FILES["ListaDeMatriculadosActual"];
                                 $file1     = $_FILES["ListaDeDistribucionAnterior"];
-                                $file2     = $_FILES["ListaDeDocentes"];
                                 
                                 $Instancia=new ClaseCSV_Array();
                                 $ListaDeDistribucionAnterior_EnArray=$Instancia->ConvertirArchivo_CSV_a_ListaArray($file1,0);
@@ -110,9 +104,7 @@
                                 if (!isset($_FILES["ListaDeDistribucionAnterior"])) {
                                     throw new Exception("Selecciona un archivo CSV válido.");
                                 }
-                                $file     = $_FILES["ListaDeMatriculadosActual"];
                                 $file1     = $_FILES["ListaDeDistribucionAnterior"];
-                                $file2     = $_FILES["ListaDeDocentes"];
                                 $Instancia=new ClaseCSV_Array();
                                 $ListaDeDistribucionAnterior_EnArray_AlumnoDocente=$Instancia->ConvertirArchivo_CSV_a_ListaArray($file1,1);
                             ?>
@@ -134,8 +126,6 @@
                                 if (!isset($_FILES["ListaDeDocentes"])) {
                                     throw new Exception("Selecciona un archivo CSV válido.");
                                 }
-                                $file     = $_FILES["ListaDeMatriculadosActual"];
-                                $file1     = $_FILES["ListaDeDistribucionAnterior"];
                                 $file2     = $_FILES["ListaDeDocentes"];
                                 $Instancia=new ClaseCSV_Array();
                                 $ListaDeDocentes_EnArray=$Instancia->ConvertirArchivo_CSV_a_ListaArray($file2,0);
