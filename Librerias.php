@@ -91,41 +91,41 @@ class ClaseFunciones{
         fclose($fp);  
     }
 
-    # funcion donde entran dos listas y creamos y retornamos una lista de Array de (ArrA-ArrB)
-    function DiferenciaListaA_ListaB($ArrayA,$ArrayB){
+    # funcion donde entran dos listas y creamos y retornamos una lista de Array de (ArregloA-ArregloB)
+    function DiferenciaListaA_ListaB($ArregloA,$ArregloB){
         $fila=0;
         $Arreglo=array();
-        $Arreglo=$this->AgregarElemento($Arreglo,$ArrayA,$ArrayB,$fila,0);
+        $Arreglo=$this->AgregarElemento($Arreglo,$ArregloA,$ArregloB,$fila,0);
         return $Arreglo;
     }
     # Funcion donde eliminamos los alumnos inactivos de la distribucion anterior, input: lista de distibucion anterior, lista de alumnos inactivos
-    function EliminarInactivos($ArrA,$ArrB){
+    function EliminarInactivos($ArregloA,$ArregloB){
         $fila=0;
         $Arreglo=array();
-        $Arreglo=$this->AgregarElemento($Arreglo,$ArrA,$ArrB,$fila,1);
+        $Arreglo=$this->AgregarElemento($Arreglo,$ArregloA,$ArregloB,$fila,1);
         return $Arreglo;
     }
 
-    function AgregarElemento($Arreglo,$ArrA,$ArrB,$fila,$Int){
-        for($x = 0; $x < count($ArrA); $x++){
+    function AgregarElemento($Arreglo,$ArregloA,$ArregloB,$fila,$Int){
+        for($x = 0; $x < count($ArregloA); $x++){
             $Existe=false;
-            for($y = 0; $y < count($ArrB); $y++){
+            for($y = 0; $y < count($ArregloB); $y++){
                 if($Int==1){
-                    if($ArrA[$x][0]==$ArrB[$y][0] and $ArrA[$x][0]!="Docente"){
+                    if($ArregloA[$x][0]==$ArregloB[$y][0] and $ArregloA[$x][0]!="Docente"){
                         $Existe=true;
                         break;
                     }
                 }
                 else{
-                    if($ArrA[$x][0]==$ArrB[$y][0] and $Int==0){
+                    if($ArregloA[$x][0]==$ArregloB[$y][0] and $Int==0){
                         $Existe=true;
                         break;
                     }
                 }
             }
             if($Existe==false){
-                $Arreglo[$fila][0]=$ArrA[$x][0];
-                $Arreglo[$fila][1]=$ArrA[$x][1];
+                $Arreglo[$fila][0]=$ArregloA[$x][0];
+                $Arreglo[$fila][1]=$ArregloA[$x][1];
                 $fila++;
             }
         }
