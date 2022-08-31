@@ -2,7 +2,7 @@
 
 ## Integrantes
 
-* Tincusi Ccorimanya Jhon Jaime 
+* Tincusi Ccorimanya Jhon Jaime           184211
 * Sandi Mamani Alex
 * Champi Puma William Ruiz
 
