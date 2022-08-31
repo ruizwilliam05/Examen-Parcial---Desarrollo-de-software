@@ -56,7 +56,7 @@ class ClaseFunciones{
             $DocenteSiguiente=$DistribucionDocenteAlumno[0][1];
             $row2=0;
             $row3=0;
-            for($row = 0; $row < 531; $row++)
+            for($row = 0; $row < count($DistribucionDocenteAlumno); $row++)
             {
                 $Distribucion2022I[$row2][1]=$DistribucionDocenteAlumno[$row][1]; //Doncente a cargo
                 $Distribucion2022I[$row2][2]=$DistribucionDocenteAlumno[$row][2]; //Cpdigo
