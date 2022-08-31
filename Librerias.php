@@ -92,10 +92,10 @@ class ClaseFunciones{
     }
 
     # funcion donde entran dos listas y creamos y retornamos una lista de Array de (ArrA-ArrB)
-    function DiferenciaListaA_ListaB($ArrA,$ArrB){
+    function DiferenciaListaA_ListaB($ArrayA,$ArrayB){
         $fila=0;
         $Arreglo=array();
-        $Arreglo=$this->AgregarElemento($Arreglo,$ArrA,$ArrB,$fila,0);
+        $Arreglo=$this->AgregarElemento($Arreglo,$ArrayA,$ArrayB,$fila,0);
         return $Arreglo;
     }
     # Funcion donde eliminamos los alumnos inactivos de la distribucion anterior, input: lista de distibucion anterior, lista de alumnos inactivos
